@@ -1,0 +1,67 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.bg-signin {
+    background-color: rgb(183, 209, 255) !important;
+}
+
+.bg-signup {
+    background-color: gainsboro !important;
+}
+
+.bg-profile {
+    background-color: darkseagreen !important;
+}
+
+.bg-update-password {
+    background-color: cornsilk !important;
+}
+
+.bg-photo-profile {
+    background-color: rgb(178, 222, 250);
+}
+
+footer {
+    height: 5em;
+    margin-top: auto;
+    background-color: rgb(235, 235, 235);
+    display: flex;
+    align-items: center;
+}
+
+.bg-message {
+    height: 450px;
+    background-color: azure;
+} 
+
+.message-me{
+    max-width: 50%;
+    background-color: cadetblue;
+    color: white;
+    margin-bottom: 0 !important;
+    padding: 0.5em;
+    border-radius: 7px;
+    font-size: smaller;
+}
+
+.message-me p{
+    margin-bottom: 0 !important;
+
+}
+
+.message-you{
+    max-width: 50%;
+    background-color: gray;
+    color: white;
+    margin-bottom: 0 !important;
+    padding: 0.5em;
+    border-radius: 7px;
+    font-size: smaller;
+}
+
+.message-you p{
+    margin-bottom: 0 !important;
+}

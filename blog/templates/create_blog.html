@@ -1,0 +1,32 @@
+{% extends 'layout_blog.html' %}
+
+{% block title %}Crear blog{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card shadow">
+            <div class="card-body p-4">
+                <h3>Crear un BLOG</h3>
+
+                {% if error %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{error}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+                
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form.media}}
+                    {{form.as_p}}
+                
+                    <input type="submit" class="btn btn-success w-100" value="Crear"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

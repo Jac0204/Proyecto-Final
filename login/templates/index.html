@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block title %}Login{% endblock %}
+{% block bg %}bg-signin{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card shadow">
+            <div class="card-header">
+                <h3>Iniciar sesión</h3>
+            </div>
+            <div class="card-body p-4">
+                
+                {% if error %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{error}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+                
+                <form method="POST">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                
+                    <input type="submit" class="btn btn-primary w-100" value="Iniciar"/>
+                </form>
+            </div>
+            <div class="card-footer text-center" style="font-size: small;">
+                ¿Aún no tienes una cuenta? <a href="{% url 'signup' %}">Click aquí</a> para registrarte
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+

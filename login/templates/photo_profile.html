@@ -1,0 +1,44 @@
+{% extends 'layout_blog.html' %}
+
+{% block title %}Foto y URL{% endblock %}
+{% block bg %}bg-photo-profile{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card shadow">
+            <div class="card-header">
+                <h3>Foto de perfil y URL</h3>
+            </div>
+            <div class="card-body p-4">
+                
+                {% if error %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{error}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+                
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form.as_p}}
+
+                    <div class="row my-3">
+                        <div class="col-md-12 text-center">
+                            <h5>Foto actual</h5>
+                            <img src="{{request.user.userprofile.imagen.url}}" class="border border-2 rounded-circle" alt="Imagen actual del usuario" width="200" height="200">
+                        </div>
+                    </div>
+                
+                    <input type="submit" class="btn btn-info w-100" value="Guardar"/>
+                </form>
+            </div>
+            <div class="card-footer text-center" style="font-size: small;">
+                ¿Deseas actualizar tus datos? <a href="{% url 'profile' %}">Click aquí</a> para modificar tu información personal
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

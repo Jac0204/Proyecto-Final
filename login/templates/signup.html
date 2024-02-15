@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block title %}Registrar{% endblock %}
+{% block bg %}bg-signup{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card shadow">
+            <div class="card-header">
+                <h3>Crear una cuenta</h3>
+            </div>
+            <div class="card-body p-4">
+                
+                {% if error %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{error}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+                
+                <form method="POST">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                
+                    <input type="submit" class="btn btn-secondary w-100" value="Registrar"/>
+                </form>
+            </div>
+            <div class="card-footer text-center" style="font-size: small;">
+                ¿Ya tienes una cuenta? <a href="{% url 'index' %}">Click aquí</a> para iniciar sesión
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

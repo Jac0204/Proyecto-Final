@@ -1,0 +1,78 @@
+{% extends 'layout_blog.html' %}
+
+{% block title %}Mensajería{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center mb-3">Mensajería</h1>
+
+<div class="row">
+    <div class="col-md-4 mb-3 mb-md-0">
+        <div class="card">
+            <div class="card-header">
+                <h5>Usuarios</h5>
+            </div>
+            <div class="card-body">
+                {% for usr in users %}
+                <div class="row mb-2">
+                    <div class="col-md-2">
+                        <img src="{{usr.userprofile.imagen.url}}" class="rounded-circle border" alt="" width="40" height="40">
+                    </div>
+                    <div class="col-md-10">
+                        <p>{{usr.username}}</p>
+                    </div>
+                </div>
+                
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5>Chat</h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="bg-message mb-3 overflow-auto p-3">
+                    {% for message in messages %}
+                    
+                    {% if message.usuario == request.user %}
+                    <div class="d-flex flex-row-reverse mb-1">
+                        <div class="message-me">
+                            {{message.mensaje | safe}}
+                            <p class="ms-5 mt-1 text-end" style="font-size: x-small;">{{message.fecha_mensaje | date:'y/m/Y H:i'}}</p>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="d-flex flex-row mb-1">
+                        <img src="{{message.usuario.userprofile.imagen.url}}" alt="Imagen del usuario" width="25" height="25" class="rounded-circle border bg-white me-2">
+                        <div class="message-you">
+                            <span style="font-size: small; font-weight: bold;">{{message.usuario.username}}</span>
+                            {{message.mensaje | safe}}
+                            <p class="ms-5 mt-1 text-end" style="font-size: x-small;">{{message.fecha_mensaje | date:'y/m/Y H:i'}}</p>
+                            
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% endfor %}
+                </div>
+
+                <form method="POST" enctype="multipart/form-data" class="px-3 pb-3">
+                    {% csrf_token %}
+                    {{form.media}}
+
+                    {% for frm in form %}
+                    {{frm}}
+                    {% endfor %}
+                
+                    <input type="submit" class="btn btn-success" value="Enviar"/>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

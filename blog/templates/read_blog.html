@@ -1,0 +1,54 @@
+{% extends 'layout_blog.html' %}
+
+{% block title %}Leer blog{% endblock %}
+
+{% block content %}
+
+{% if blog.autor == request.user %}
+<div class="row">
+    <div class="col-md-6">
+        <a class="btn btn-success w-100" href="{% url 'update_blog' blog.id %}" role="button">Actualizar</a>
+    </div>
+    <div class="col-md-6">
+        <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Eliminar
+        </button>
+    </div>
+</div>
+{% endif %}
+
+<h1 class="my-3">{{blog.titulo}}</h1>
+
+<img src="{{blog.imagen.url}}" alt="Imagen del BLOG" class="w-100 rounded" height="600px">
+
+<h4 class="my-3">{{blog.subtitulo}}</h4>
+
+<hr/>
+<p>{{blog.fecha_edicion|date:'d M Y H:i:s'}} - Creado por: {{blog.autor}}</p>
+<hr/>
+
+<p>{{blog.cuerpo | safe}}</p>
+
+<!-- Modal Eliminar -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar BLOG</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Está seguro(a) de eliminar este blog?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <form action="{% url 'delete_blog' blog.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-primary" value="Eliminar"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
